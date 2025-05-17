@@ -1,8 +1,4 @@
-/*
-
-made by Black-Tappy
-contact owner +254759000340
-*/
+//Black-Tappy
 
 
 
@@ -17,7 +13,7 @@ import {
     useMultiFileAuthState,
     getContentType
 } from '@whiskeysockets/baileys';
-import { Handler, Callupdate, GroupUpdate } from './shadowXtappy/shadowXevents/shadow.js';
+import { Handler, Callupdate, GroupUpdate } from './shadowXtapyy/shadowXevents/shadow.js';
 import express from 'express';
 import pino from 'pino';
 import fs from 'fs';
@@ -62,21 +58,21 @@ async function downloadSessionData() {
     console.log("Debugging SESSION_ID:", config.SESSION_ID);
 
     if (!config.SESSION_ID) {
-        console.error('❌ Please add your session to SESSION_ID env !!');
+        console.error('Please add your session to SESSION_ID env !!');
         return false;
     }
 
     const sessdata = config.SESSION_ID.split("POPKID~")[1];
 
     if (!sessdata || !sessdata.includes("#")) {
-        console.error('❌ Invalid SESSION_ID format! It must contain both file ID and decryption key.');
+        console.error('Invalid SESSION_ID format! It must contain both file ID and decryption key.');
         return false;
     }
 
     const [fileID, decryptKey] = sessdata.split("#");
 
     try {
-        console.log("♻️ Downloading Session...");
+        console.log("Downloading Session...");
         const file = File.fromURL(`https://mega.nz/file/${fileID}#${decryptKey}`);
 
         const data = await new Promise((resolve, reject) => {
@@ -87,54 +83,12 @@ async function downloadSessionData() {
         });
 
         await fs.promises.writeFile(credsPath, data);
-        console.log("🔒 Session Successfully Loaded !!");
+        console.log("Session Successfully Loaded !!");
         return true;
     } catch (error) {
-        console.error('❌ Failed to download session data:', error);
+        console.error('Failed to download session data:', error);
         return false;
     }
-}
-
-//update autobio
-const lifeQuotes = [
-  "The only way to do great work is to love what you do.",
-  "Strive not to be a success, but rather to be of value.",
-  "The mind is everything. What you think you become.",
-  "The best time to plant a tree was 20 years ago. The second best time is now.",
-  "Life is what happens when you're busy making other plans.",
-  "Be the change that you wish to see in the world.",
-  "The future belongs to those who believe in the beauty of their dreams.",
-  "It is never too late to be what you might have been.",
-  "Do not wait to strike till the iron is hot; but make the iron hot by striking.",
-  "The journey of a thousand miles begins with a single step."
-];
-
-async function updateBio(Matrix) {
-  try {
-    const now = moment().tz('Africa/Nairobi');
-    const time = now.format('HH:mm:ss');
-    const randomIndex = Math.floor(Math.random() * lifeQuotes.length);
-    const randomQuote = lifeQuotes[randomIndex];
-    const bio = `✨🌇 ꜱʜᴀᴅᴏᴡ xᴛᴇᴄʜ ɪs ✨ ᴀᴄᴛɪᴠᴇ ✨ 🟢 | ⏳ ${time} | 📸 | 💬🌆  | ${randomQuote}`;
-    await Matrix.updateProfileStatus(bio);
-    console.log(chalk.yellow(`ℹ️ Bio updated to: "${bio}"`));
-  } catch (error) {
-    console.error(chalk.red('Failed to update bio:'), error);
-  }
-}
-
-async function updateLiveBio(Matrix) {
-  try {
-   const now = moment().tz('Africa/Nairobi');
-    const time = now.format('HH:mm:ss');
-    const randomIndex = Math.floor(Math.random() * lifeQuotes.length);
-    const randomQuote = lifeQuotes[randomIndex];
-    const bio = `✨🌇 ꜱʜᴀᴅᴏᴡ xᴛᴇᴄʜ ɪs ✨ ᴀᴄᴛɪᴠᴇ ✨ 🟢 | ⏳ ${time} | 📸 | 💬🌆  | ${randomQuote}`;
-    await Matrix.updateProfileStatus(bio);
-    console.log(chalk.yellow(`ℹ️ Bio updated to: "${bio}"`));
-  } catch (error) {
-    console.error(chalk.red('Failed to update bio:'), error);
-  }
 }
 
 async function getStartingMessageData() {
@@ -151,13 +105,13 @@ async function start() {
     try {
         const { state, saveCreds } = await useMultiFileAuthState(sessionDir);
         const { version, isLatest } = await fetchLatestBaileysVersion();
-        console.log(`Shadow-Xtech using WA v${version.join('.')}, isLatest: ${isLatest}`);
+        console.log(`Shadow Xtech using WA v${version.join('.')}, isLatest: ${isLatest}`);
 
         const Matrix = makeWASocket({
             version,
             logger: pino({ level: 'silent' }),
             printQRInTerminal: useQR,
-            browser: ["Sʜᴀᴅᴏᴡ-Xᴛᴇᴄʜ, "safari", "3.3"],
+            browser: ["Sʜᴀᴅᴏᴡ-Xᴛᴇᴄʜ", "safari", "3.3"],
             auth: state,
             getMessage: async (key) => {
                 return { conversation: "shadow xtech whatsapp user bot" };
@@ -172,7 +126,7 @@ async function start() {
                 }
             } else if (connection === 'open') {
                 if (initialConnection) {
-                    console.log(chalk.green("✔️  ꜱʜᴀᴅᴏᴡ xᴛᴇᴄʜ ɪs ɴᴏᴡ ᴏɴʟɪɴᴇ ᴀɴᴅ ᴘᴏᴡᴇʀᴇᴅ ᴜᴘ"));
+                    console.log(chalk.green("✔️  ꜱʜᴀᴅᴏᴡ-xᴛᴇᴄʜ ɪs ɴᴏᴡ ᴏɴʟɪɴᴇ ᴀɴᴅ ᴘᴏᴡᴇʀᴇᴅ ᴜᴘ"));
 
                     const startingMessageData = await getStartingMessageData();
 
@@ -270,8 +224,8 @@ async function init() {
 
 init();
 
-// EXPRESS ROUTES
-const htmlDir = path.join(__dirname, 'mydata', 'joeljames');
+// XTECH ROUTES
+const htmlDir = path.join(__dirname, 'mydata', 'xtech');
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(htmlDir, 'index.html'));
