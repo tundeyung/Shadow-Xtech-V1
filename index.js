@@ -127,7 +127,7 @@ const port = process.env.PORT || 9090;
 │   Star Us [**Here**](https://github.com/Tappy-Black/Shadow-Xtech-V1)!  
 ╰─🛠️ *Prefix:* \`${prefix}\`
 
-> _© MADE BY POPKID_`;
+> _© MADE BY Ⴊl𐌀Ꮳk𐌕𐌀ႲႲჄ_`;
     conn.sendMessage(conn.user.id, { image: { url: `https://files.catbox.moe/3hrxbh.jpg` }, caption: up })
   }
   })
